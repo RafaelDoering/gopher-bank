@@ -43,7 +43,7 @@ func (c *controller) AddUser(w http.ResponseWriter, r *http.Request) {
 	result, err := userService.Create(&user)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(error.ServiceError{Message: "Error saving the post"})
+		json.NewEncoder(w).Encode(error.ServiceError{Message: "Error saving the user"})
 	}
 
 	w.WriteHeader(http.StatusOK)
@@ -53,12 +53,12 @@ func (c *controller) AddUser(w http.ResponseWriter, r *http.Request) {
 func (c *controller) FindAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "application/json")
 
-	posts, err := userService.FindAll()
+	users, err := userService.FindAll()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(error.ServiceError{Message: "Error getting the posts"})
+		json.NewEncoder(w).Encode(error.ServiceError{Message: "Error getting the users"})
 	}
 
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(posts)
+	json.NewEncoder(w).Encode(users)
 }
